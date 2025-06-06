@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Tournoi BRF – Suivi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #002395, white, #ed2939);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #002395;
+      margin-bottom: 20px;
+    }
+
+    .icons {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .teams-container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      padding: 30px;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #002395;
+      color: white;
+    }
+
+    td input {
+      width: 60px;
+      padding: 6px;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 30px;
+      color: #444;
+    }
+
+    .highlight {
+      background-color: #f0f8ff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="icons">👮‍♂️ ⚖️ 🚓</div>
+  <h1>Tournoi de Pétanque – BRF</h1>
+
+  <div class="teams-container">
+    <h2>Équipes inscrites</h2>
+    <table id="teamsTable">
+      <thead>
+        <tr>
+          <th>Équipe</th>
+          <th>Joueur 1</th>
+          <th>Joueur 2</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Équipes ajoutées dynamiquement -->
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    Journée Cohésion – 20 mai 2026 🇫🇷
+  </footer>
+
+  <script>
+    const teams = JSON.parse(localStorage.getItem('teams')) || [];
+    const tableBody = document.querySelector('#teamsTable tbody');
+
+    if (teams.length === 0) {
+      tableBody.innerHTML = '<tr><td colspan="4">Aucune équipe inscrite.</td></tr>';
+    } else {
+      teams.forEach((team, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${team.teamName}</strong></td>
+          <td>${team.players[0]}</td>
+          <td>${team.players[1]}</td>
+          <td><input type="text" placeholder="0" /></td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+  </script>
+
+</body>
+</html>
